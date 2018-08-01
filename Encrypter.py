@@ -1,9 +1,10 @@
+
 #!/usr/bin/env python
 
 import seccure
 
-def encrypt(plaintext):
-	public_key = str(seccure.passphrase_to_pubkey(b'tommy'))
+def encrypt(plaintext,private_key):
+	public_key = str(seccure.passphrase_to_pubkey(bytes(private_key,encoding='utf-8')))
 	ciphertext = seccure.encrypt(bytes(plaintext,encoding='utf-8'),bytes(public_key,encoding='utf-8'))
 	return ciphertext
 
@@ -12,4 +13,4 @@ def decrypt(ciphertext,private_key):
 	return(plaintext)
 
 if __name__ == "__main__":
-	print(decrypt(encrypt("tommy"),"tommy").decode('utf-8'))
+	print(decrypt(encrypt("tommy","mykey"),"mykey").decode('utf-8'))
